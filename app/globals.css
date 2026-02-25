@@ -23,6 +23,20 @@
   /* Neutral */
   --color-gray-500: hsl(186, 15%, 59%);
   --color-gray-900: hsl(187, 24%, 22%);
+
+  /* Animations */
+  --animate-toast: toastSlide 3s ease-in-out infinite;
+
+  @keyframes toastSlide {
+    0%,
+    100% {
+      transform: translateY(-18.75rem);
+    }
+    10%,
+    90% {
+      transform: translateY(0px);
+    }
+  }
 }
 
 * {
@@ -68,4 +82,8 @@ body {
 
 .btn--primary {
   @apply bg-green-600 text-white;
+}
+
+.afterAsterisk {
+  @apply after:content-["*"] after:ml-2 after:text-green-600;
 }

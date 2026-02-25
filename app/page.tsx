@@ -15,32 +15,50 @@ export default function Home() {
         </h1>
 
         <label className="field field--half">
-          First Name
+          <span className="afterAsterisk">First Name</span>
           <input type="text" name="" id="" />
           <span className="error">This field is required</span>
         </label>
 
         <label className="field field--half">
-          Last Name
+          <span className="afterAsterisk">Last Name</span>
           <input type="text" />
           <span className="error">This field is required</span>
         </label>
 
         <label className="field field--full">
-          Email Address
+          <span className="afterAsterisk">Email Address</span>
           <input type="text" />
           <span className="error">
             Please enter a valid email address This field is required
           </span>
         </label>
 
-        <p>
-          Query Type General Enquiry Support Request Please select a query type
-        </p>
+        <fieldset className="flex flex-col basis-full">
+          <legend className="text-gray-900 afterAsterisk">Query Type</legend>
+
+          <div className="flex gap-4 mt-4">
+            <div className="basis-1/2 p-4 flex gap-4 border border-green-600 rounded-2xl">
+              <input type="radio" name="queryType" id="general" />
+              <label htmlFor="general" className="grow cursor-pointer">
+                General Enquiry
+              </label>
+            </div>
+
+            <div className="basis-1/2 p-4 flex gap-4 border border-green-600 rounded-2xl">
+              <input type="radio" name="queryType" id="support" />
+              <label htmlFor="support" className="grow cursor-pointer">
+                Support Request
+              </label>
+            </div>
+          </div>
+
+          <span className="error">Please select a query type</span>
+        </fieldset>
 
         {/* Message */}
         <label className="field field--full">
-          <p>Message</p>
+          <p className="afterAsterisk">Message</p>
           <textarea name="" id="" rows={4} className=""></textarea>
           <span className="error">This field is required</span>
         </label>
@@ -48,17 +66,15 @@ export default function Home() {
         {/* Consent checkbox */}
         <label className="field field--full field--horizontal flex-wrap">
           <input type="checkbox" name="" id="" className="basis-8 shrink-0" />
-          <p className="">I consent to being contacted by the team</p>
+          <p className="ml-4 afterAsterisk">
+            I consent to being contacted by the team
+          </p>
           <span className="error basis-full">
             To submit this form, please consent to being contacted
           </span>
         </label>
 
-        <button
-          // onClick={() => setShowToast(!showToast)}
-          onClick={() => toast()}
-          className="btn btn--primary basis-full"
-        >
+        <button onClick={() => toast()} className="btn btn--primary basis-full">
           Submit
         </button>
 
