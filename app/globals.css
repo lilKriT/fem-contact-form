@@ -26,12 +26,13 @@
 }
 
 * {
-  @apply outline-1 outline-red-300;
+  /* @apply outline-1 outline-red-300; */
 }
 
 body {
   background: var(--color-green-200);
   font-size: var(--text-base);
+  font-weight: 400;
   color: var(--foreground);
   font-family: var(--font-karla-sans), Arial, Helvetica, sans-serif;
 }

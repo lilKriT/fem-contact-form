@@ -1,9 +1,15 @@
-import Toast from "./Toast";
+"use client";
+
+import { useState } from "react";
+import Toast from "./_components/Toast";
+import { toast } from "@/lib/toast";
 
 export default function Home() {
+  const [showToast, setShowToast] = useState(false);
+
   return (
     <section className="min-h-dvh flex justify-center items-center">
-      <div className="max-w-4xl bg-white flex flex-wrap gap-y-4 gap-x-4 px-12 py-10 rounded-3xl">
+      <div className="max-w-4xl bg-white flex flex-wrap gap-y-4 gap-x-4 px-12 py-10 rounded-3xl mx-8 my-32">
         <h1 className="text-[clamp(var(--text-3xl),8vw,(var(--text-4xl)))] text-gray-900 basis-full">
           Contact Us
         </h1>
@@ -48,7 +54,13 @@ export default function Home() {
           </span>
         </label>
 
-        <button className="btn btn--primary basis-full">Submit</button>
+        <button
+          // onClick={() => setShowToast(!showToast)}
+          onClick={() => toast()}
+          className="btn btn--primary basis-full"
+        >
+          Submit
+        </button>
 
         <Toast />
       </div>
