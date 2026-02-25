@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <section className="min-h-dvh flex justify-center items-center">
-      <div className="max-w-4xl bg-white flex flex-wrap gap-y-4 gap-x-4 px-12 py-10 rounded-3xl mx-8 my-32">
+      <div className="max-w-4xl bg-white flex flex-wrap gap-y-4 gap-x-4 px-[clamp(1rem,5vw,3rem)] py-10 rounded-3xl mx-8 my-32">
         <h1 className="text-[clamp(var(--text-3xl),8vw,(var(--text-4xl)))] text-gray-900 basis-full">
           Contact Us
         </h1>
@@ -37,20 +37,35 @@ export default function Home() {
         <fieldset className="flex flex-col basis-full">
           <legend className="text-gray-900 afterAsterisk">Query Type</legend>
 
-          <div className="flex gap-4 mt-4">
-            <div className="basis-1/2 p-4 flex gap-4 border border-green-600 rounded-2xl">
-              <input type="radio" name="queryType" id="general" />
-              <label htmlFor="general" className="grow cursor-pointer">
-                General Enquiry
-              </label>
-            </div>
+          {/* Radio buttons */}
+          <div className="flex flex-wrap gap-4 mt-4">
+            <label
+              htmlFor="general"
+              className="basis-[calc(50%-.5rem)] min-w-[30ch] grow p-4 flex gap-4 border border-green-600 rounded-2xl cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="queryType"
+                id="general"
+                className="peer sr-only"
+              />
+              <span className="w-6 aspect-square rounded-full peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat"></span>
+              <span className="grow">General Enquiry</span>
+            </label>
 
-            <div className="basis-1/2 p-4 flex gap-4 border border-green-600 rounded-2xl">
-              <input type="radio" name="queryType" id="support" />
-              <label htmlFor="support" className="grow cursor-pointer">
-                Support Request
-              </label>
-            </div>
+            <label
+              htmlFor="support"
+              className="basis-[calc(50%-.5rem)] min-w-[30ch] grow p-4 flex gap-4 border border-green-600 rounded-2xl cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="queryType"
+                id="support"
+                className="peer sr-only"
+              />
+              <span className="w-6 aspect-square rounded-full peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat"></span>
+              <span className="grow">Support Request</span>
+            </label>
           </div>
 
           <span className="error">Please select a query type</span>
@@ -65,7 +80,8 @@ export default function Home() {
 
         {/* Consent checkbox */}
         <label className="field field--full field--horizontal flex-wrap">
-          <input type="checkbox" name="" id="" className="basis-8 shrink-0" />
+          <input type="checkbox" name="" id="" className="peer sr-only " />
+          <span className="w-6 aspect-square peer-checked:bg-[url(/icon-checkbox-check.svg)] bg-cover bg-no-repeat"></span>
           <p className="ml-4 afterAsterisk">
             I consent to being contacted by the team
           </p>
@@ -74,7 +90,10 @@ export default function Home() {
           </span>
         </label>
 
-        <button onClick={() => toast()} className="btn btn--primary basis-full">
+        <button
+          onClick={() => toast()}
+          className="btn btn--primary basis-full mt-8"
+        >
           Submit
         </button>
 

@@ -40,7 +40,7 @@
 }
 
 * {
-  /* @apply outline-1 outline-red-300; */
+  @apply outline-1 outline-red-300;
 }
 
 body {
@@ -77,7 +77,7 @@ body {
 }
 
 .btn {
-  @apply px-8 py-4 rounded-2xl cursor-pointer;
+  @apply px-8 py-4 rounded-2xl cursor-pointer text-lg;
 }
 
 .btn--primary {
