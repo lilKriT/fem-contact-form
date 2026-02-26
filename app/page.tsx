@@ -41,7 +41,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-4 mt-4">
             <label
               htmlFor="general"
-              className="basis-[calc(50%-.5rem)] min-w-[30ch] grow p-4 flex gap-4 border border-green-600 rounded-2xl cursor-pointer"
+              className="relative overflow-hidden basis-[calc(50%-.5rem)] min-w-[30ch] grow p-4 flex items-center gap-4 border peer-checked:bg-amber-300 border-green-600 rounded-2xl cursor-pointer"
             >
               <input
                 type="radio"
@@ -49,13 +49,14 @@ export default function Home() {
                 id="general"
                 className="peer sr-only"
               />
-              <span className="w-6 aspect-square rounded-full peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat"></span>
-              <span className="grow">General Enquiry</span>
+              <div className="absolute inset-0 peer-checked:bg-green-200 pointer-events-none"></div>
+              <span className="z-10 w-6 aspect-square rounded-full outline outline-gray-500 peer-checked:outline-none peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat bg-center"></span>
+              <span className="z-10 grow">General Enquiry</span>
             </label>
 
             <label
               htmlFor="support"
-              className="basis-[calc(50%-.5rem)] min-w-[30ch] grow p-4 flex gap-4 border border-green-600 rounded-2xl cursor-pointer"
+              className="relative overflow-hidden basis-[calc(50%-.5rem)] min-w-[30ch] grow p-4 flex items-center gap-4 border border-green-600 rounded-2xl cursor-pointer"
             >
               <input
                 type="radio"
@@ -63,8 +64,9 @@ export default function Home() {
                 id="support"
                 className="peer sr-only"
               />
-              <span className="w-6 aspect-square rounded-full peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat"></span>
-              <span className="grow">Support Request</span>
+              <div className="absolute inset-0 peer-checked:bg-green-200 pointer-events-none"></div>
+              <span className="z-10 w-6 aspect-square rounded-full outline outline-gray-500 peer-checked:outline-none peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat bg-center"></span>
+              <span className="z-10 grow">Support Request</span>
             </label>
           </div>
 
@@ -79,9 +81,9 @@ export default function Home() {
         </label>
 
         {/* Consent checkbox */}
-        <label className="field field--full field--horizontal flex-wrap">
+        <label className="field field--full field--horizontal flex-wrap mt-4">
           <input type="checkbox" name="" id="" className="peer sr-only " />
-          <span className="w-6 aspect-square peer-checked:bg-[url(/icon-checkbox-check.svg)] bg-cover bg-no-repeat"></span>
+          <span className="w-6 aspect-square outline outline-green-600 rounded-sm peer-checked:bg-[url(/icon-checkbox-check.svg)] bg-cover bg-no-repeat"></span>
           <p className="ml-4 afterAsterisk">
             I consent to being contacted by the team
           </p>
