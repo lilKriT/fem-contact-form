@@ -134,7 +134,7 @@ export default function Home() {
 
     if (Object.values(newErrors).some((e) => e !== "")) {
       {
-        console.log("You have errors");
+        // console.log("You have errors");
         return false;
       }
     }
