@@ -61,7 +61,7 @@ body {
   }
 
   span.error {
-    @apply text-red-500 hidden;
+    @apply text-red-500;
   }
 }
 
@@ -75,6 +75,13 @@ body {
 
 .field--horizontal {
   @apply flex-row;
+}
+
+.field--error {
+  input,
+  textarea {
+    @apply border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500;
+  }
 }
 
 .btn {

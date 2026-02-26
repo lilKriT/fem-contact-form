@@ -5,7 +5,153 @@ import Toast from "./_components/Toast";
 import { toast } from "@/lib/toast";
 
 export default function Home() {
-  const [showToast, setShowToast] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [queryType, setQueryType] = useState("");
+  const [message, setMessage] = useState("");
+  const [contactConsent, setContactConsent] = useState(false);
+
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    queryType: "",
+    message: "",
+    contactConsent: "",
+  });
+
+  const validateFirstName = () => {
+    if (!firstName.trim()) {
+      setErrors((prev) => ({
+        ...prev,
+        firstName: "This field is required",
+      }));
+
+      return "This field is required";
+    } else {
+      setErrors((prev) => ({ ...prev, firstName: "" }));
+      return "";
+    }
+  };
+
+  const validateLastName = () => {
+    if (!lastName.trim()) {
+      setErrors((prev) => ({
+        ...prev,
+        lastName: "This field is required",
+      }));
+
+      return "This field is required";
+    } else {
+      setErrors((prev) => ({ ...prev, lastName: "" }));
+      return "";
+    }
+  };
+
+  const validateEmail = () => {
+    if (!email.trim()) {
+      setErrors((prev) => ({
+        ...prev,
+        email: "This field is required",
+      }));
+
+      return "This field is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrors((prev) => ({
+        ...prev,
+        email: "Please enter a valid email address",
+      }));
+
+      return "Please enter a valid email address";
+    } else {
+      setErrors((prev) => ({ ...prev, email: "" }));
+      return "";
+    }
+  };
+
+  const validateQueryType = () => {
+    if (!queryType.trim()) {
+      setErrors((prev) => ({
+        ...prev,
+        queryType: "Please select a query type",
+      }));
+
+      return "Please select a query type";
+    } else {
+      setErrors((prev) => ({ ...prev, queryType: "" }));
+      return "";
+    }
+  };
+
+  const validateMessage = () => {
+    if (!message.trim()) {
+      setErrors((prev) => ({
+        ...prev,
+        message: "This field is required",
+      }));
+
+      return "This field is required";
+    } else {
+      setErrors((prev) => ({ ...prev, message: "" }));
+      return "";
+    }
+  };
+
+  const validateConsent = () => {
+    if (!contactConsent) {
+      setErrors((prev) => ({
+        ...prev,
+        contactConsent:
+          "To submit this form, please consent to being contacted",
+      }));
+
+      return "To submit this form, please consent to being contacted";
+    } else {
+      setErrors((prev) => ({ ...prev, contactConsent: "" }));
+      return "";
+    }
+  };
+
+  const handleValidation = (): boolean => {
+    const newErrors = {
+      firstName: validateFirstName(),
+      lastName: validateLastName(),
+      email: validateEmail(),
+      queryType: validateQueryType(),
+      message: validateMessage(),
+      contactConsent: validateConsent(),
+    };
+
+    console.log(newErrors);
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some((e) => e !== "")) {
+      {
+        console.log("You have errors");
+        return false;
+      }
+    }
+
+    // validateFirstName();
+    // validateLastName();
+    // validateEmail();
+    // validateQueryType();
+    // validateMessage();
+    // validateConsent();
+
+    // Object.entries(errors).forEach((key, value) => {
+    //   console.log(key, value);
+    // });
+
+    // for (const key in errors) {
+    //   const typedKey = key as keyof typeof errors;
+    //   console.log(key, errors[typedKey]);
+    //   if (errors[typedKey] !== "") return false;
+    // }
+
+    return true;
+  };
 
   return (
     <section className="min-h-dvh flex justify-center items-center">
@@ -14,26 +160,51 @@ export default function Home() {
           Contact Us
         </h1>
 
-        <label className="field field--half">
+        {/* First name */}
+        <label
+          className={`field field--half ${errors.firstName && "field--error"}`}
+        >
           <span className="afterAsterisk">First Name</span>
-          <input type="text" name="" id="" />
-          <span className="error">This field is required</span>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+            onBlur={() => validateFirstName()}
+          />
+          <span className="error">{errors.firstName}</span>
         </label>
 
-        <label className="field field--half">
+        {/* Last name */}
+        <label
+          className={`field field--half ${errors.lastName && "field--error"}`}
+        >
           <span className="afterAsterisk">Last Name</span>
-          <input type="text" />
-          <span className="error">This field is required</span>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            onBlur={() => validateLastName()}
+          />
+          <span className="error">{errors.lastName}</span>
         </label>
 
-        <label className="field field--full">
+        {/* Email */}
+        <label
+          className={`field field--full ${errors.email && "field--error"}`}
+        >
           <span className="afterAsterisk">Email Address</span>
-          <input type="text" />
-          <span className="error">
-            Please enter a valid email address This field is required
-          </span>
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => validateEmail()}
+          />
+          <span className="error">{errors.email}</span>
         </label>
 
+        {/* Query type */}
         <fieldset className="flex flex-col basis-full">
           <legend className="text-gray-900 afterAsterisk">Query Type</legend>
 
@@ -48,6 +219,11 @@ export default function Home() {
                 name="queryType"
                 id="general"
                 className="peer sr-only"
+                checked={queryType === "general"}
+                onChange={(e) => {
+                  setQueryType("general");
+                  validateQueryType();
+                }}
               />
               <div className="absolute inset-0 peer-checked:bg-green-200 pointer-events-none"></div>
               <span className="z-10 w-6 aspect-square rounded-full outline outline-gray-500 peer-checked:outline-none peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat bg-center"></span>
@@ -63,6 +239,11 @@ export default function Home() {
                 name="queryType"
                 id="support"
                 className="peer sr-only"
+                checked={queryType === "support"}
+                onChange={(e) => {
+                  setQueryType("support");
+                  validateQueryType();
+                }}
               />
               <div className="absolute inset-0 peer-checked:bg-green-200 pointer-events-none"></div>
               <span className="z-10 w-6 aspect-square rounded-full outline outline-gray-500 peer-checked:outline-none peer-checked:bg-[url(/icon-radio-selected.svg)] bg-cover bg-no-repeat bg-center"></span>
@@ -70,30 +251,63 @@ export default function Home() {
             </label>
           </div>
 
-          <span className="error">Please select a query type</span>
+          <span className="error text-red-500">{errors.queryType}</span>
         </fieldset>
 
         {/* Message */}
-        <label className="field field--full">
+        <label
+          className={`field field--full ${errors.message && "field--error"}`}
+        >
           <p className="afterAsterisk">Message</p>
-          <textarea name="" id="" rows={4} className=""></textarea>
-          <span className="error">This field is required</span>
+          <textarea
+            name=""
+            id=""
+            rows={4}
+            className=""
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onBlur={() => validateMessage()}
+          ></textarea>
+          <span className="error">{errors.message}</span>
         </label>
 
         {/* Consent checkbox */}
         <label className="field field--full field--horizontal flex-wrap mt-4">
-          <input type="checkbox" name="" id="" className="peer sr-only " />
+          <input
+            type="checkbox"
+            name=""
+            id=""
+            className="peer sr-only "
+            checked={contactConsent}
+            onChange={(e) => {
+              const isChecked = e.target.checked;
+              setContactConsent(isChecked);
+
+              if (!isChecked) {
+                setErrors((prev) => ({
+                  ...prev,
+                  contactConsent:
+                    "To submit this form, please consent to being contacted",
+                }));
+              } else {
+                setErrors((prev) => ({ ...prev, contactConsent: "" }));
+              }
+            }}
+          />
           <span className="w-6 aspect-square outline outline-green-600 rounded-sm peer-checked:bg-[url(/icon-checkbox-check.svg)] bg-cover bg-no-repeat"></span>
           <p className="ml-4 afterAsterisk">
             I consent to being contacted by the team
           </p>
-          <span className="error basis-full">
-            To submit this form, please consent to being contacted
-          </span>
+          <span className="error basis-full">{errors.contactConsent}</span>
         </label>
 
+        {/* Submit */}
         <button
-          onClick={() => toast()}
+          onClick={() => {
+            const validationPassed = handleValidation();
+
+            if (validationPassed) toast();
+          }}
           className="btn btn--primary basis-full mt-8"
         >
           Submit

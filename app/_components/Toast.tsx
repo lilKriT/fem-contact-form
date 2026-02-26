@@ -18,7 +18,7 @@ const Toast = () => {
 
   return (
     <div
-      className={`${isOpen && "animate-toast"} absolute top-16 left-1/2 -translate-x-1/2 text-white bg-emerald-900 flex flex-col gap-2 p-6 rounded-2xl w-fit`}
+      className={`${isOpen && "animate-toast"} z-10 fixed top-16 left-1/2 -translate-x-1/2 text-white bg-emerald-900 flex flex-col gap-2 p-6 rounded-2xl w-fit`}
     >
       <div className="flex items-center gap-2">
         <svg
