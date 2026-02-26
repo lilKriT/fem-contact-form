@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "./_components/Toast";
 import { toast } from "@/lib/toast";
 
@@ -11,6 +11,12 @@ export default function Home() {
   const [queryType, setQueryType] = useState("");
   const [message, setMessage] = useState("");
   const [contactConsent, setContactConsent] = useState(false);
+
+  useEffect(() => {
+    if (queryType !== "") {
+      setErrors((prev) => ({ ...prev, queryType: "" }));
+    }
+  }, [queryType]);
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -222,7 +228,7 @@ export default function Home() {
                 checked={queryType === "general"}
                 onChange={(e) => {
                   setQueryType("general");
-                  validateQueryType();
+                  // validateQueryType();
                 }}
               />
               <div className="absolute inset-0 peer-checked:bg-green-200 pointer-events-none"></div>
@@ -241,8 +247,9 @@ export default function Home() {
                 className="peer sr-only"
                 checked={queryType === "support"}
                 onChange={(e) => {
-                  setQueryType("support");
-                  validateQueryType();
+                  const value = "support";
+                  setQueryType(value);
+                  // validateQueryType();
                 }}
               />
               <div className="absolute inset-0 peer-checked:bg-green-200 pointer-events-none"></div>
